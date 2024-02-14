@@ -56,6 +56,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product get(int id) {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getProductId() == id){
+                return products.get(i);
+            }
+        }
         return null;
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return products;
     }
 }
