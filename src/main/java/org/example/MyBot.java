@@ -34,7 +34,7 @@ public class MyBot extends TelegramLongPollingBot {
                 SendMessage message = new SendMessage();
                 message.setChatId(chatId);
                 message.setText("Assalomu aleykum. Tilni tanlang\n\n" +
-                        "Привет. Выберите язык");
+                        "Privet. Vibrayte Yazik");
                 message.setReplyMarkup(buttonService.language());
                 try {
                     execute(message);
@@ -44,15 +44,20 @@ public class MyBot extends TelegramLongPollingBot {
             }else {
                 User user = userService.get(chatId);
                 switch (user.getState()){
+
                     case LANG -> {
                         if (text.equals("\uD83C\uDDFA\uD83C\uDDFF O'zbek tili")){
                             user.setState(BotState.REGISTRATION);
-                            EditMessageText txt = new EditMessageText();
-                            txt.setMessageId(1);
+                            SendMessage txt = new SendMessage();
                             txt.setText("Yaxshi endi registratsiyani davom ettirish uchun botga qanday maqsadda kirganingizni yozing");
                             txt.setChatId(chatId);
                             txt.setReplyMarkup(buttonService.sales());
-                        } else if (text.equals("Русский язык \uD83C\uDDF7\uD83C\uDDFA")) {
+                            try {
+                                execute(txt);
+                            } catch (TelegramApiException e) {
+                                throw new RuntimeException(e);
+                            }
+                        } else if (text.equals("Russkiy yazik \uD83C\uDDF7\uD83C\uDDFA")) {
 
                         }
                     }case MAIN -> {
