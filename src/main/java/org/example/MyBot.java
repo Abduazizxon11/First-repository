@@ -47,7 +47,6 @@ public class MyBot extends TelegramLongPollingBot {
 
                     case LANG -> {
                         if (text.equals("\uD83C\uDDFA\uD83C\uDDFF O'zbek tili")){
-                            user.setState(BotState.REGISTRATION);
                             SendMessage txt = new SendMessage();
                             txt.setText("Yaxshi endi registratsiyani davom ettirish uchun botga qanday maqsadda kirganingizni yozing");
                             txt.setChatId(chatId);
