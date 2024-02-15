@@ -7,7 +7,6 @@ import org.example.service.BotButtonService;
 import org.example.service.impl.UserServiceImpl;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -34,7 +33,7 @@ public class MyBot extends TelegramLongPollingBot {
                 SendMessage message = new SendMessage();
                 message.setChatId(chatId);
                 message.setText("Assalomu aleykum. Tilni tanlang\n\n" +
-                        "Privet. Vibrayte Yazik");
+                        "Привет. Выберите язык");
                 message.setReplyMarkup(buttonService.language());
                 try {
                     execute(message);
@@ -56,10 +55,10 @@ public class MyBot extends TelegramLongPollingBot {
                             } catch (TelegramApiException e) {
                                 throw new RuntimeException(e);
                             }
-                        } else if (text.equals("Russkiy yazik \uD83C\uDDF7\uD83C\uDDFA")) {
+                        } else if (text.equals("Русский язык \uD83C\uDDF7\uD83C\uDDFA")) {
 
                         }
-                    }case MAIN -> {
+                    }case REGISTRATION -> {
 
                     }
                 }
