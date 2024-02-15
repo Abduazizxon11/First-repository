@@ -11,6 +11,7 @@ import org.example.service.UserService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -29,7 +30,7 @@ public class UserServiceImpl implements UserService {
         list.add(user);
         Gson gson = new Gson();
         String json = gson.toJson(list);
-        boolean b = fileService.writeDataFromFile(json, fileName);
+        boolean b = fileService.writeDataFromFile(Collections.singletonList(json), fileName);
         System.out.println(b);
 
 

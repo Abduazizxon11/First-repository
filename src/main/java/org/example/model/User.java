@@ -11,6 +11,8 @@ public class User {
     private BotState state;
     private Roles role;
 
+
+
     public long getChatId() {
         return chatId;
     }

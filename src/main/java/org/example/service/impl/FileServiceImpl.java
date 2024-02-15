@@ -1,8 +1,10 @@
 package org.example.service.impl;
 
+import org.example.model.User;
 import org.example.service.FileService;
 
 import java.io.*;
+import java.util.List;
 
 public class FileServiceImpl implements FileService {
     @Override
@@ -27,12 +29,12 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public boolean writeDataFromFile(String data, String fileName) {
+    public boolean writeDataFromFile(List<String> users, String fileName) {
         File file = new File("src/main/resources/files/" + fileName);
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
-            writer.write(data);
+            writer.write(users.toString());
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);

@@ -11,10 +11,13 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyBot extends TelegramLongPollingBot {
     UserServiceImpl userService = new UserServiceImpl();
     BotButtonService buttonService = new BotButtonService();
+    List<User> users = new ArrayList<>();
     public MyBot(String botToken){
         super(botToken);
     }
@@ -30,10 +33,11 @@ public class MyBot extends TelegramLongPollingBot {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
+                users.add(user);
                 SendMessage message = new SendMessage();
                 message.setChatId(chatId);
                 message.setText("Assalomu aleykum. Tilni tanlang\n\n" +
-                        "Привет. Выберите язык");
+                        "Privet. Vibrayte yazik");
                 message.setReplyMarkup(buttonService.language());
                 try {
                     execute(message);
@@ -55,7 +59,7 @@ public class MyBot extends TelegramLongPollingBot {
                             } catch (TelegramApiException e) {
                                 throw new RuntimeException(e);
                             }
-                        } else if (text.equals("Русский язык \uD83C\uDDF7\uD83C\uDDFA")) {
+                        } else if (text.equals("Russkiy yazik \uD83C\uDDF7\uD83C\uDDFA")) {
 
                         }
                     }case REGISTRATION -> {
@@ -64,7 +68,33 @@ public class MyBot extends TelegramLongPollingBot {
                 }
             }
         } else if (update.hasCallbackQuery()) {
-
+            String text = update.getMessage().getText();
+            long chatId = update.getMessage().getChatId();
+            String data = update.getCallbackQuery().getMessage().getText();
+            if (data.equals("Sotuvchi mijoz")) {
+                userService.update(chatId, new User(chatId, "", "", "", null, Roles.ADMIN));
+                SendMessage message = new SendMessage();
+                message.setChatId(chatId);
+                message.setText("Yaxshi. Endi akkauntingiz uchun parol kiriting");
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
+                String pass = update.getMessage().getText();
+                userService.update(chatId, new User(chatId, "", "", pass, null, Roles.ADMIN));
+            }else if(data.equals("Mijoz")){
+                SendMessage message = new SendMessage();
+                message.setChatId(chatId);
+                message.setText("Yaxshi. Endi akkauntingiz uchun parol kiriting");
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
+                String pass = update.getMessage().getText();
+                userService.update(chatId, new User(chatId, "", "", pass, null, Roles.USER));
+            }
         }
     }
 
