@@ -1,0 +1,129 @@
+TASK 1:
+
+CREATE TABLE student(
+	id BIGINT NOT NULL PRIMARY KEY,
+	name VARCHAR(50),
+	birthday DATE,
+	group_students int
+);
+
+CREATE TABLE subject(
+	id BIGINT NOT NULL PRIMARY KEY,
+	name VARCHAR(50) NOT NULL,
+	description VARCHAR(500),
+	grade INT NOT NULL
+);
+
+CREATE TABLE Payment_type(
+	id BIGINT NOT NULL PRIMARY KEY,
+	name VARCHAR(50)
+);
+
+CREATE TABLE payment(
+	id BIGINT NOT NULL PRIMARY KEY,
+	type_id BIGINT references payment_type(id),
+	amount INT,
+	student_id BIGINT references student(id),
+	payment_time DATE
+);
+
+CREATE TABLE mark(
+	id BIGINT NOT NULL PRIMARY KEY,
+	student_id BIGINT references student(id),
+	subject_id BIGINT references subject(id),
+	mark INT
+);
+
+
+TASK 2:
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(1,'John', DATE '2022-04-22', 1);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(2,'Chris', DATE '2022-04-22', 1);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(3,'Carl', DATE '2022-04-22', 1);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(4,'Oliver', DATE '2022-04-22', 2);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(5,'James', DATE '2022-04-22', 2);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(6,'Lucas', DATE '2022-04-22', 2);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(7,'Henry', DATE '2022-04-22', 2);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(8,'Jacob', DATE '2022-04-22', 3);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(9,'Logan', DATE '2022-04-22', 3);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(10,'Someone1', DATE '2022-04-22', 4);
+
+INSERT INTO student(id, name, birthday, group_students) VALUES(11,'Someone2', DATE '2022-04-22', 5);
+
+
+INSERT INTO subject(id, name, grade) VALUES(1,'Art', 1);
+
+INSERT INTO subject(id, name, grade) VALUES(2,'Music', 1);
+
+INSERT INTO subject(id, name, grade) VALUES(3,'Geogrphy', 2);
+
+INSERT INTO subject(id, name, grade) VALUES(4,'History', 2);
+
+INSERT INTO subject(id, name, grade) VALUES(5,'PE', 3);
+
+INSERT INTO subject(id, name, grade) VALUES(6,'Math', 3);
+
+INSERT INTO subject(id, name, grade) VALUES(7,'IT', 4);
+
+INSERT INTO subject(id, name, grade) VALUES(8,'Science', 4);
+
+INSERT INTO subject(id, name, grade) VALUES(9,'Something1', 5);
+
+INSERT INTO subject(id, name, grade) VALUES(10,'Something2', 5);
+
+INSERT INTO payment_type(id, name) VALUES(1,'DAILY');
+
+INSERT INTO payment_type(id, name) VALUES(2,'WEEKLY');
+
+INSERT INTO payment_type(id, name) VALUES(3,'MONTHLY');
+
+
+INSERT INTO payment(id, type_id, amount, student_id, payment_time) VALUES(1, 2, 200, 1, DATE '2024-11-12');
+
+INSERT INTO payment(id, type_id, amount, student_id, payment_time) VALUES(2, 3, 150, 4, DATE '2024-11-12');
+
+INSERT INTO payment(id, type_id, amount, student_id, payment_time) VALUES(3, 2, 150, 7, DATE '2024-11-12');
+
+INSERT INTO payment(id, type_id, amount, student_id, payment_time) VALUES(4, 1, 800, 5, DATE '2024-11-12');
+
+
+INSERT INTO mark(id, student_id, subject_id, mark) VALUES(1, 2, 2, 8);
+
+INSERT INTO mark(id, student_id, subject_id, mark) VALUES(2, 4, 4, 5);
+
+INSERT INTO mark(id, student_id, subject_id, mark) VALUES(3, 5, 3, 9);
+
+INSERT INTO mark(id, student_id, subject_id, mark) VALUES(4, 8, 6, 4);
+
+INSERT INTO mark(id, student_id, subject_id, mark) VALUES(5, 9, 5, 9);
+
+TASK 3:
+
+--Boshida not null qilib ketga edim
+
+ALTER TABLE mark ADD CHECK (mark >= 1 AND mark <= 10);
+
+ALTER TABLE subject ADD CHECK (grade >= 1 AND grade <= 5);
+
+ALTER TABLE payment_type ADD UNIQUE (name);
+
+--Bu o'xshamadi
+
+TASK 4:
+
+SELECT * FROM student;
+
+SELECT * FROM student LIMIT 50;
+
+SELECT name FROM student;
+
+SELECT DISTINCT(amount) FROM payment;
