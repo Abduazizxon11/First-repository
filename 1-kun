@@ -110,13 +110,13 @@ TASK 3:
 
 --Boshida not null qilib ketga edim
 
+--Boshida qilib qo'ygandim
+
 ALTER TABLE mark ADD CHECK (mark >= 1 AND mark <= 10);
 
 ALTER TABLE subject ADD CHECK (grade >= 1 AND grade <= 5);
 
 ALTER TABLE payment_type ADD UNIQUE (name);
-
---Bu o'xshamadi
 
 TASK 4:
 
