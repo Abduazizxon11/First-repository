@@ -108,7 +108,7 @@ INSERT INTO mark(id, student_id, subject_id, mark) VALUES(5, 9, 5, 9);
 
 TASK 3:
 
---Boshida not null qilib ketga edim
+--Boshida not null qilib ketgan edim
 
 --Boshida qilib qo'ygandim
 
